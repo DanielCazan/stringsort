@@ -1,0 +1,84 @@
+==Gherkin==
+
+1. Write Gherkin tests..
+    Tests are available in the Gherkin folder
+
+2. Explain in detail why these tests might be helpful in the future.
+    Already useful - I ran all of them manual and realized two behaviors I was not accounting for
+    Later they can be used with other tools to generate automated tests
+    Later they can be read through to understand the expectations on how the script is intended to behave
+
+==Tools==
+
+1. In your opinion, what’s helpful about version control systems? What’s annoying about them?
+    Great for attestation - who made changes (for when you need to know why something changed / was added)
+    Great for checking how code worked - especially with legacy code that may have been removed but is then found to
+        have served an important function, or that you need to compare existing flows to
+    Great for reverting - when things go wrong and you need to stabilize things quickly, it is the big 'undo' tool
+    Great for supporting multiple versions - when we support older releases of a tool and need to add behavior to all
+    Great for working in parallel - with each developer working on different branches and then merging back together
+    Annoying - tools can get into strange or edge states, especially regarding merging, that are painful to handle
+    Annoying - can get messy if not merged regularly and carefully, and very diverted paths can be hard to re-integrate
+
+2. As a QA person, you have 2 weeks to prepare before your team starts writing software. What do you do?
+    Investigate
+        Understand the scope of the problem, the stakeholders, expectations, timelines
+        Develop a high-level test-plan (and use it to further clarify what is needed)
+        Determine what tools and infrastructure will be needed to execute the test plan
+            Determine existing tools / resources that may be impacted
+            We may need to add tests that make sure existing features do not break (if not available)
+            We may be able to leverage existing resources/ processes
+        Determine what tools and infrastructure are not available
+            Some may need to be investigated and potentially purchased or developed (determine cost and timelines)
+            Some may need workarounds (determine viability and if we need to backlog 'better' solutions)
+            Some may not be available / achievable (potentially backlog, discuss involved risk with team)
+    Negotiate
+        Present findings regularly, particularly to the developers who will be most directly involved
+        Develop and present more detailed plan to determine what tests we want to implement and by when
+    Parallel development
+        Start working on the infrastructure, framework, basic happy-paths, and critical high-risk portions
+        Start working with mock-structures where possible (mock-data, manually handling some behaviors, 'run stuff')
+
+3. When is it appropriate to use automated testing? When is it appropriate to use manual testing?
+    Automated testing is desired whenever and wherever possible.  Over a long-term it adds stability and confidence
+    Manual testing can be run when initially replicating a customer issue to quickly confirm fixes (backlog auto)
+    Manual testing can be run before implementing automated versions, to grok the behavior of a system
+    Manual testing can be run for hackdays, exploring the edge-cases of a system
+    Manual testing can be run when the test is important but automation is not feasible given available resources
+
+4. Your dev team has just modified an existing product by adding new features and refactoring the code for old features.
+The devs claim to have written unit tests; you’re in charge of integration testing.
+Dedicated teams are handling performance and security testing, so you don’t have to.
+As is always the case in the real world, you don’t have time to test everything.
+What factors do you think about as you decide where to focus your testing efforts?
+How do you decide what not to test?
+    I would start with trusting what others are handling (though recommending hackdays - 'trust but verify')
+
+    In the remaining space:
+
+    What components are impacted by the new features and refactoring (directly) - [risk++]
+    Which components work with or depend on those changed components - [risk+]
+    Historically, what has broken when similar changes have been made in other areas - [risk+]
+
+    Where are the component-boundaries - where we can limit the input and output space for more systematic testing?
+
+    What areas do we have high auto-test coverage in? - [confidence++]
+    What's partially tested by other things? [confidence+]
+    What have we tested manually after the changes? [confidence++]
+    Which related components have historically stayed stable [confidence+] or have been unstable [confidence-]?
+
+    For user and environment behaviors:
+    What are the most likely behaviors?  What are the most risky situations?  [value++]
+    What are high-visibility and/or high-impact deliverables to stakeholders?  [value++]
+    What are reasonable behaviors?  Expectations from the UI?  Impacted documentation?  [value+]
+
+    Implementation wise:
+    What requires a lot of expensive (time or money) tooling? [cost++]
+    How many important tests would that tooling enable or improve? {cost--]
+    How risky is that new tooling - blue-sky development [cost+], adding working tools [cost-]
+
+    -- Then, if we need to trim, we trim / backlog: low-value, high-confidence, low-risk, high-cost
+
+
+
+
