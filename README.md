@@ -2,6 +2,7 @@
 Personal project file, not for re-distribution
 Author: Daniel Cazan
 
+==========
 Scope
 
 Given: 
@@ -10,14 +11,23 @@ Given:
 ** comma-separated string
 ** terminated with new line character
 * default input name: 'input.csv'
-When
+When:
 * strings are sorted into descending alphabetical order
-Then
+Then:
 * sorted strings are outputted into a new CSV
 * default output name: 'output.csv'
 
-Constraints
+Constraints:
 * solution is runnable with a Docker command (include a Dockerfile)
 * Gherkin tests for the program
 ** Do not have to write step definitions (tests do not have to be executable)
 * Attach a write-up file with additional questions and answers
+
+==========
+Execute
+
+Required (see Docs/Assumptions.txt):
+* Persistent directory or volume that contains the input and output files
+Run:
+* $ docker build -t csvstringsort-docker -f Dockerfile.build .
+* $ docker run csvstringsort-docker python csvstringsorter.py

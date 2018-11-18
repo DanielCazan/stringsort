@@ -1,0 +1,35 @@
+Emerging questions (that I would normally ask the team I am working with)
+* Is there a specific desired version of python?  (At pervious company we were limited to 2.7 for compatibility reasons)
+    Assumptions:
+      Using containers, this is a self-contained script
+    Therefore:
+      Anything is fine.  Already have 3.7 installed, so using that
+
+* How is the input file supposed to go in?  output file to go out?
+    Assumptions:
+      We want persistent files so we expect a docker directory to map to a volume or disk-space
+      A docker user knows how to set up their individual system to do that for their specific limitations
+        Using VBox on Windows 7 was tricky and required
+            https://forums.docker.com/t/how-to-share-volumes-and-or-drives-using-docker-machine-on-windows-not-beta/20170/6
+            $ docker-machine stop
+            $ cd [VBoxManage.exe directory]
+            $ ./VBoxManage sharedfolder add default --name "shared_target" --hostpath "[hard-disk location]" --automount
+            $ docker-machine start
+            $ docker run -v /shared_target:/[path in container] [rest of execution paramters, eg. -it ubuntu bash]
+    Therefore:
+      Instructions will be added that specify a user has to map a disk path (or volume) to a simple name
+      Project will be set up with assumption that user has configured their system to have /simple_target mapped
+
+* Why Dockerfile?
+    Assumptions:
+        A simple one-shot python script could be executed directly in docker using:
+            $ docker run --rm --name my-running-script -v /shared_target:/app/stringsorter -w /app/stringsorter     \
+                -it python:3.7 python csvstringsorter.py
+            Where /shared_target is mapped to a location on disk-space
+            Where sample_python.py is the script being executed in the working directory
+        Test project requires a Dockerfile to see one created / distributed
+    Therefore:
+      Will create a simple Dockerfile for exercise purposes / in case the project grew in the future
+      Will note that if a user of this script wanted alternate behavior without editing Dockerfile
+        (eg. using a volume instead of /simple_target)
+        they could execute the command directly using -v or --mount for their desired destination

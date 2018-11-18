@@ -1,0 +1,4 @@
+0.1.0
+Goal: Dockerize a simple python 'hello script'
+
+

@@ -1,0 +1,17 @@
+# Instructions
+# $ docker build -t csvstringsort-docker:0.1.0 -f Dockerfile.build .
+# $ docker run csvstringsort-docker:0.1.0 python csvstringsorter.py
+
+# Python-image derived Dockerfile for executing a single python script
+FROM python:3.7
+MAINTAINER R. Daniel Cazan <danielcazan@danielcazan.com>
+
+# Make sure anything we use is up to date
+RUN apt-get update
+
+# We use a different dir than the instructions for running without a Dockerfile
+# We copy in all of our files and go to where we placed them
+COPY *.py /app/csvstringsorter/
+WORKDIR /app/csvstringsorter
+
+CMD echo "Working files are in the container at '/app/csvstringsorter'"
