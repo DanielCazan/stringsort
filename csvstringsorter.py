@@ -3,7 +3,7 @@ import os
 import optparse                 # allows OptionParser for command line options
 import time                     # used to timestamp files
 
-version = '0.1.1'
+version = '0.2.0'
 
 
 class CSVStringSorter:
@@ -27,11 +27,21 @@ class CSVStringSorter:
 
         if self.verbose:
             print("3. Writing Output")
-        self.write_output(sorted_line=sorted_line)
+        return self.write_output(sorted_line=sorted_line)
 
     def sort_line(self):
-        # TODO: Perform sort
-        return self.input_line
+        split_line = [x.strip() for x in self.input_line.split(',')]
+        # Python has a sort function already, using it because I would not normally re-invent a working wheel
+        # Since this is a test, just for reference-sake, I added a stand-alone python project that implements
+        #   most of the common search and sort functions as they would be done in Python.  I did that a little while
+        #   ago just to refresh myself on each of them - which of them I would implement would depend on what
+        #   size lists and behavior I was optimizing for - large lists, mostly-sorted lists, etc
+        # This is not being used as part of this test but can be easily added in if requested
+        split_line.sort(reverse=True)
+        if self.verbose:
+            print("Sorted line: {0}".format(split_line))
+
+        return ','.join(split_line)
 
     def write_output(self, sorted_line):
         output_file = self.output_file
@@ -44,8 +54,12 @@ class CSVStringSorter:
             print("Output written to: {0}".format(output_file))
         except IOError:
             print("Error: Unable to write output to: {0}".format(output_file))
-            return True
-        return False
+            return False
+        except TypeError:
+            print("Error: Written output but be a string, not a list: {0}".format(sorted_line))
+            return False
+
+        return True
 
     @staticmethod
     def get_unique_file_name(input_name):
@@ -69,6 +83,7 @@ class CSVStringSorter:
             with open(self.input_file) as open_file:
                 # using readline() because it is only first line.
                 # would not use readlines() as that would try to read the whole file into memory -> 'for line in f'
+                # python has a csv.reader on a csv file, but we only need / want to load the one line
                 if not self.limit:
                     self.input_line = open_file.readline()
                 else:
@@ -92,7 +107,8 @@ def main():
 
     sorter = CSVStringSorter(input_file=options.input_file, output_file=options.output_file,
                              limit=options.limit, verbose=options.verbose)
-    sorter.sort_input()
+    if not sorter.sort_input():
+        sys.exit("Program completed with errors")
 
     sys.exit(0)
 

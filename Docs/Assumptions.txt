@@ -5,7 +5,7 @@ Emerging questions (that I would normally ask the team I am working with)
     Therefore:
       Anything is fine.  Already have 3.7 installed, so using that
 
-* How is the input file supposed to go in?  output file to go out?
+* How is the input file supposed to go in?  Output file to go out?
     Assumptions:
       We want persistent files so we expect a docker directory to map to a volume or disk-space
       A docker user knows how to set up their individual system to do that for their specific limitations
@@ -33,3 +33,10 @@ Emerging questions (that I would normally ask the team I am working with)
       Will note that if a user of this script wanted alternate behavior without editing Dockerfile
         (eg. using a volume instead of /simple_target)
         they could execute the command directly using -v or --mount for their desired destination
+
+* Whitespaces are not discussed in documentation
+    Assumptions:
+        Whitespaces leading / following words are normally for formatting and not considered part of the word
+        Whitespaces in the middle of a word can be part of the word, such as place-names
+    Therefore:
+        Stripping leading / trailing white-spaces only and not considering them for sorting purposes

@@ -5,4 +5,8 @@ Dockerize a simple python 'hello script'
 Read/Write Input and Output files from a persistent location ('/shared_target)
 Added optional flags to support Input / Output with custom file locations
 Added shell script file for faster development
+0.2.0
+Added splitting and sorting for the mvp example list
+Sorting is easy in Python so added Reference folder with how common manual-sorts could be implemented / why
+
 
