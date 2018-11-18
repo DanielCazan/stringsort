@@ -40,3 +40,13 @@ Emerging questions (that I would normally ask the team I am working with)
         Whitespaces in the middle of a word can be part of the word, such as place-names
     Therefore:
         Stripping leading / trailing white-spaces only and not considering them for sorting purposes
+
+* ASCII characters are not discussed in documentation
+    Assumptions:
+        Ascii characters are edge-cases based on the seemingly intended goal of the project (word sorting)
+        When prioritizing between ascii-order and word order (ignoring case), word order is more important
+        The two goals (ascii priority and case-ignored word priority) are mutually exclusive
+            because 'a' > ']' > 'Z'     but 'z|Z' > 'a|A'
+    Therefore:
+        All words will be treated by their lower-case values
+        Ascii   [ \ ] ^ _ `     will be acceptably out of order compared to capital case letters
