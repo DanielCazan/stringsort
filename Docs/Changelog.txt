@@ -15,3 +15,5 @@ Added Gherkin directory and documented sorted-related desired behavior
 Made sorting case-insensitive
 Removed empty words from the output
 
+0.2.2
+Added Gherkin behavior for input-output files

@@ -50,3 +50,10 @@ Emerging questions (that I would normally ask the team I am working with)
     Therefore:
         All words will be treated by their lower-case values
         Ascii   [ \ ] ^ _ `     will be acceptably out of order compared to capital case letters
+
+* Complex pathing
+    Assumptions:
+        The base MVP scope is to use input.csv as an input and output.csv as the output
+        This is intended to work in the same directory as the script
+    Therefore:
+        We will not do extensive testing of specifying paths for input and output files at this time
