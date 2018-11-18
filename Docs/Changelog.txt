@@ -1,4 +1,8 @@
 0.1.0
-Goal: Dockerize a simple python 'hello script'
+Dockerize a simple python 'hello script'
 
+0.1.1
+Read/Write Input and Output files from a persistent location ('/shared_target)
+Added optional flags to support Input / Output with custom file locations
+Added shell script file for faster development
 
