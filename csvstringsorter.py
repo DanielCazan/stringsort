@@ -3,7 +3,7 @@ import os
 import optparse                 # allows OptionParser for command line options
 import time                     # used to timestamp files
 
-version = '0.2.2'
+version = '0.3.1'
 
 
 class CSVStringSorter:

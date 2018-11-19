@@ -26,3 +26,6 @@ Added unit-tests around sorting and file IO
 Updated quick_run script to remove generated containers on exit
 Updated documentation
 Removed default from verbose so default behavior is now 'quiet' unless a '-v' flag is passed in
+
+0.3.1
+Updated formatting on README.md for Docs and Resources
