@@ -20,3 +20,9 @@ Added Gherkin behavior for input-output files
 
 0.2.3
 Added 'ExerciseResponses.txt' with responses to problem questions
+
+0.3.0
+Added unit-tests around sorting and file IO
+Updated quick_run script to remove generated containers on exit
+Updated documentation
+Removed default from verbose so default behavior is now 'quiet' unless a '-v' flag is passed in

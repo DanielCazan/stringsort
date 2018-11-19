@@ -86,24 +86,34 @@ class CSVStringSorter:
 
         # However, the Pythony design philosophy is 'Easier to Ask for Forgiveness than Permission'
         # https://jeffknupp.com/blog/2013/02/06/write-cleaner-python-use-exceptions/
+
+        self.set_input_line(input_line=None)
         try:
             with open(self.input_file) as open_file:
                 # using readline() because it is only first line.
                 # would not use readlines() as that would try to read the whole file into memory -> 'for line in f'
                 # python has a csv.reader on a csv file, but we only need / want to load the one line
                 if not self.limit:
-                    self.input_line = open_file.readline()
+                    self.set_input_line(open_file.readline())
                 else:
-                    self.input_line = open_file.readline(self.limit)
+                    self.set_input_line(open_file.readline(self.limit))
         except IOError:
             print("Error: Unable to read input file: {0}".format(self.input_file))
-            self.input_line = None
             return False
         # as per PEP 8, not using broad exception, handling specific situations, allowing exceptional failures
 
         if self.verbose:
             print("Input line: {0}".format(self.input_line))
         return True
+
+    def set_input_line(self, input_line):
+        # moving simple action to individual function to support unit-test behavior
+        # in case we later decide to do further validation on input this will ensure unit-tests are going through the
+        # same behavior as load_input.  Could get around this in testing by using mocks (or even setting variables
+        # directly - Python does not really protect them, but I believe best-practices is for development to write
+        # and refactor code with the intent of it being easily testable
+        self.input_line = input_line
+        return self.input_line
 
 
 def main():
@@ -133,7 +143,7 @@ def parse_options():
                  help="(opt) CSV file being written (if it exists, will append timestamp to new one) (def) output.csv")
     p.add_option('--limit', '-l', action="store", dest="limit", type="int",
                  help="(opt) Specify a maximum number of bytes to read from very long lines")
-    p.add_option('--verbose', '-v', action="store_true", dest="verbose", default=True,
+    p.add_option('--verbose', '-v', action="store_true", dest="verbose",
                  help="(opt) Enable extensive prints for debug purposes")
     options, args = p.parse_args()
     return options
