@@ -27,22 +27,22 @@ class TestSorting(unittest.TestCase):
         expected_output = ""
         self._sort_and_compare(expected_output=expected_output, test_string=test_string)
 
-    def test_empty_bad_commas(self):
+    def test_bad_commas(self):
         test_string = ",Copenhagen,,Stockholm, ,oslo,"
         expected_output = "Stockholm,oslo,Copenhagen"
         self._sort_and_compare(expected_output=expected_output, test_string=test_string)
 
-    def test_empty_numerical(self):
+    def test_numerical(self):
         test_string = "3, 201,21"
         expected_output = "3,21,201"
         self._sort_and_compare(expected_output=expected_output, test_string=test_string)
 
-    def test_empty_alphanumerical(self):
+    def test_alphanumerical(self):
         test_string = "3, a, B, X, z, 201,21"
         expected_output = "z,X,B,a,3,21,201"
         self._sort_and_compare(expected_output=expected_output, test_string=test_string)
 
-    def test_empty_ascii(self):
+    def test_ascii(self):
         test_string = "#,P,{,s,a,]"
         expected_output = "{,s,P,a,],#"
         self._sort_and_compare(expected_output=expected_output, test_string=test_string)

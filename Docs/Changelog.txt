@@ -29,3 +29,6 @@ Removed default from verbose so default behavior is now 'quiet' unless a '-v' fl
 
 0.3.1
 Updated formatting on README.md for Docs and Resources
+
+0.3.2
+Updated unit test names
